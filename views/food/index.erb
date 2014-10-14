@@ -1,0 +1,15 @@
+<a href='/foods/new' >Create a new Food!</a>
+
+<ul>
+	
+	<% @foods.each do |food| %>
+	
+		<li>
+	
+			<a href="/foods/<%= food.id %>"><%= food.name %>: $<%= food.price %></a>
+	
+		</li>
+
+	<% end %>
+
+</ul>

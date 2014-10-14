@@ -1,0 +1,13 @@
+<form action='/orders' method='post'>
+	Party: <input name='order[party_id]' />
+	Food: <input name='order[food_id]' />
+	<input type='submit' />
+</form>
+
+<ul>
+	<% @orders.each do |order|%>
+		<li>
+			<a href="/orders/<%= order.id %>" >Order #: <%= order.id %> Party: <%= order.party_id %> Food: <%= order.food_id %></a>
+		</li>
+	<% end %>
+</ul>

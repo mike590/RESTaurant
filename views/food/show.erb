@@ -1,0 +1,9 @@
+<p><%= @food.name %>: Price <%= @food.price %></p>
+<a href="/foods/<%= @food.id %>/edit" %><p>Edit!</a></p>
+
+<a href='/foods'> Back to Foods Page! </a>
+
+<form action="/foods/<%= @food.id %>" method='post' >
+	<input type='hidden' name='_method' value='delete' />
+	<input type='submit' value='Delete!' />
+</form>

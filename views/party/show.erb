@@ -1,0 +1,9 @@
+<p><%= @party.name %>: Size <%= @party.size %></p>
+<a href="/parties/<%= @party.id %>/edit" %><p>Edit!</a></p>
+
+<a href='/parties'> Back to Parties Page! </a>
+
+<form action="/parties/<%= @party.id %>" method='post' >
+	<input type='hidden' name='_method' value='delete' />
+	<input type='submit' value='Delete!' />
+</form>

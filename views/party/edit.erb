@@ -1,0 +1,6 @@
+<form action="/parties/<%= @party.id %>" method='post' >
+	<input type='hidden' name='_method' value='patch' />
+	New Name: <input name='party[name]' />
+	New Price: <input name='party[size]' />
+	<input type='submit' />
+</form>

@@ -1,6 +1,20 @@
 <p><%= @party.name %>: Size <%= @party.size %></p>
 <a href="/parties/<%= @party.id %>/edit" %><p>Edit!</a></p>
 
+Make a new order!
+<form action='/parties/<%= @party.id %>' method='post'>
+	<input type='hidden' name='party_name' value='<%= @party.name %>'/>
+	Food: <input name='food_name' />
+	<input type='submit' />
+</form>
+
+<%= @party.name %> has ordered:
+<% @orders.each do |order| %>
+	<% if @party.id == order.party_id %>
+		<p><%= @foods.find(order.food_id).name %></p>
+	<% end %>
+<% end %>
+
 <a href='/parties'> Back to Parties Page! </a>
 
 <form action="/parties/<%= @party.id %>" method='post' >

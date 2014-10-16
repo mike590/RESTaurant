@@ -12,6 +12,8 @@ require './models/party'
 
 get '/' do
 	@orders = Order.all
+	@parties = Party.all
+	@foods = Food.all
 	erb :index
 end
 
@@ -26,6 +28,8 @@ end
 
 get '/foods/:id' do
 	@food = Food.find(params[:id])
+	@parties = Party.all
+	@orders = Order.all
 	erb :'food/show'
 end
 
@@ -61,6 +65,8 @@ end
 
 get '/parties/:id' do
 	@party = Party.find(params[:id])
+	@foods = Food.all
+	@orders = Order.all
 	erb :'party/show'
 end
 
@@ -86,16 +92,41 @@ delete '/parties/:id' do
 end
 
 post '/orders' do
-	Order.create(params[:order])
+	party = Party.find_by(name: params[:party_name])# find the right party
+	food = Food.find_by(name: params[:food_name])# find the right food
+	Order.create(party_id:  party.id, food_id: food.id) # create the order based on both
+	# redirect
+	# Order.create(params[:order])
 	redirect '/'
 end
 
-patch '/orders/:id' do
+post '/parties/:id' do
+	party = Party.find_by(name: params[:party_name])# find the right party
+	food = Food.find_by(name: params[:food_name])# find the right food
+	Order.create(party_id:  party.id, food_id: food.id) # create the order based on both
+	# redirect
+	# Order.create(params[:order])
+	redirect "/parties/#{party.id}"
+end
+
+get '/orders/:id' do
 	@order = Order.find(params[:id])
 	erb :show
 end
 
-delete '/orders' do
+patch '/orders/:id' do
+	order = Order.find(params[:id])
+	if order.no_charge == "true"
+		order.update(no_charge: "false")
+	else
+		order.update(no_charge: "true")
+	end
+	redirect '/'
+end
+
+delete '/orders/:id' do
+	Order.destroy(params[:id])
+	redirect '/'
 end
 
 get '/parties/:id/receipt' do

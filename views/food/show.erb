@@ -1,6 +1,16 @@
 <p><%= @food.name %>: Price <%= @food.price %></p>
 <a href="/foods/<%= @food.id %>/edit" %><p>Edit!</a></p>
 
+<% @orders.each do |order| %>
+
+	<% if @food.id == order.food_id %>
+		
+		<p><%= @parties.find(order.party_id).name %> ordered this.</p>
+
+	<% end %>
+
+<% end %>
+
 <a href='/foods'> Back to Foods Page! </a>
 
 <form action="/foods/<%= @food.id %>" method='post' >

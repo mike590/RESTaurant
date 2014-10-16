@@ -88,6 +88,12 @@ end
 
 delete '/parties/:id' do
 	Party.destroy(params[:id])
+	orders = Order.all
+	orders.each do |order|
+		if order.party_id.to_i == params[:id].to_i
+			Order.destroy(order.id)
+		end
+	end
 	redirect "/parties"
 end
 
@@ -109,9 +115,25 @@ post '/parties/:id' do
 	redirect "/parties/#{party.id}"
 end
 
-get '/orders/:id' do
-	@order = Order.find(params[:id])
-	erb :show
+get '/parties/:id/receipt' do
+	party = Party.find(params[:id])
+	# to get the parties foods we call party.foods
+	sum = 0
+	receipt = File.open('active_receipt.txt', "w") do |receipt|
+		receipt.write("Thank you for dining with us!\n")
+		receipt.write("#{party.name}\nSize: #{party.size}\n")
+	  party.foods.each do |food|
+	  	receipt.write("#{food.name}: $#{food.price}\n")
+	  	sum += food.price
+	  end
+	  receipt.write("Total: $#{sum}\n")
+	  receipt.write("15% Gratuity: $ #{sum * 1.15}\n")
+		receipt.write("20% Gratuity: $ #{sum * 1.2}\n")
+		receipt.write("25% Gratuity: $ #{sum * 1.25}\n")
+		receipt.close
+
+	end
+	attachment "active_receipt.txt"
 end
 
 patch '/orders/:id' do
@@ -129,8 +151,14 @@ delete '/orders/:id' do
 	redirect '/'
 end
 
-get '/parties/:id/receipt' do
-end
 
 patch '/parties/:id/checkout' do
+	party = Party.find(params[:id])
+	party.update(paid: "true")
+	redirect "/parties/#{party.id}"
+end
+
+get '/console' do
+	binding.pry
+	redirect '/'
 end

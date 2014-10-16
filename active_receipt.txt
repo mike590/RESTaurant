@@ -1,0 +1,9 @@
+Thank you for dining with us!
+mike
+Size: 3
+Cheerios: $3
+burger: $8
+Total: $11
+15% Gratuity: $ 12.649999999999999
+20% Gratuity: $ 13.2
+25% Gratuity: $ 13.75

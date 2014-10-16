@@ -8,7 +8,18 @@ Make a new order!
 	<input type='submit' />
 </form>
 
-<%= @party.name %> has ordered:
+<p><form action='/parties/<%= @party.id %>/receipt' method='get'>
+	<input type="submit" value="Receipt" />
+</form></p>
+
+<% if @party.paid == "false" %>
+<form action='/parties/<%= @party.id %>/checkout' method='post'>
+	<input type='hidden' name='_method' value='patch' />
+	<input type='submit' value='Checkout' />
+</form>
+<% end %>
+
+<p><%= @party.name %> has ordered:</p>
 <% @orders.each do |order| %>
 	<% if @party.id == order.party_id %>
 		<p><%= @foods.find(order.food_id).name %></p>

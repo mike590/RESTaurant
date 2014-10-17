@@ -1,12 +1,37 @@
-<p><%= @party.name %>: Size <%= @party.size %></p>
-<a href="/parties/<%= @party.id %>/edit" %><p>Edit!</a></p>
+<% if @errors %>
+<div class="errors">
+<h1><%= @errors.count %> <%= @errors.count == 1 ? "ERROR" : "ERRORS" %>.</h1>
+  <ul>
+    <% @errors.each do |error|  %>
+      <li><h2><%= error %></h2></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
+<p><%= @party.name %>: Size <%= @party.size %></p>
+<a href="/parties/<%= @party.id %>/edit" %><p>Edit!</a>
+<form action="/parties/<%= @party.id %>" method='post' >
+	<input type='hidden' name='_method' value='delete' />
+	<input type='submit' value='Delete!' />
+</form></p>
+
+<p><a href='/parties'> Back to Parties Page! </a></p>
+
+
+
+<% if @party.paid == "false" %>
 Make a new order!
-<form action='/parties/<%= @party.id %>' method='post'>
-	<input type='hidden' name='party_name' value='<%= @party.name %>'/>
-	Food: <input name='food_name' />
-	<input type='submit' />
-</form>
+	<form action='/orders' method='post'>
+		<input type='hidden' name='party_name' value='<%= @party.name %>'/>
+		Food: <select name='food_name' >
+			<% @foods.each do |food| %>
+				<option value='<%= food.name %>'><%= food.name %></option>
+			<% end %>
+		</select>
+		<input type='submit' />
+	</form>
+<% end %>
 
 <p><form action='/parties/<%= @party.id %>/receipt' method='get'>
 	<input type="submit" value="Receipt" />
@@ -19,16 +44,24 @@ Make a new order!
 </form>
 <% end %>
 
+<% if @party.orders.count == 0 %>
+<p><%= @party.name %> hasn't ordered anything.</p>
+<% else %>
 <p><%= @party.name %> has ordered:</p>
-<% @orders.each do |order| %>
-	<% if @party.id == order.party_id %>
-		<p><%= @foods.find(order.food_id).name %></p>
-	<% end %>
+<% @party.orders.each do |order| %>
+
+		<p><%= order.food.name %>: $<%= order.food.price %></p>
+		
+		<% if order.no_charge == "true" %>This order is not charged to the bill<% else %>This order's price is included in the bill<% end %>
+		<form action='/orders/<%= order.id %>' method='post' >
+				<input type='hidden' name='_method' value='patch' />
+				<input type='submit' value="<% if order.no_charge == 'true' %> Include Charge?<% else %>No Charge?<% end %>" />
+			</form>
+			<form action='/orders/<%= order.id %>' method='post' >
+				<input type='hidden' name='_method' value='delete' />
+				<input type='hidden' name='party_id' value='<%= @party.id %>' />
+
+				<input type='submit' value='Delete!' />
+			</form>	
 <% end %>
-
-<a href='/parties'> Back to Parties Page! </a>
-
-<form action="/parties/<%= @party.id %>" method='post' >
-	<input type='hidden' name='_method' value='delete' />
-	<input type='submit' value='Delete!' />
-</form>
+<% end %>

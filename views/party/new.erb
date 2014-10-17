@@ -1,3 +1,14 @@
+<% if @errors %>
+<div class="errors">
+<h1><%= @errors.count %> <%= @errors.count == 1 ? "ERROR" : "ERRORS" %>.</h1>
+  <ul>
+    <% @errors.each do |error|  %>
+      <li><h2><%= error %></h2></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
 <form action='/parties' method='post'>
 	New Party: <input name='party[name]' />
 	New Party Size <input name='party[size]' />

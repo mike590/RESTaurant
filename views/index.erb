@@ -4,30 +4,3 @@ Welcome to the Restaurant!
 <p><a href='/foods'>The Menu</a></p>
 <p><a href='/parties'>Parties</a></p>
 
-
-
-
-
-<form action='/orders' method='post'>
-	Party: <input name='party_name' />
-	Food: <input name='food_name' />
-	<input type='submit' />
-</form>
-<p><a href='/foods'>Go To Foods!</a></p>
-<p><a href='/parties'>Go To Parties!</a></p>
-<ul>
-	<% @orders.each do |order|%>
-		<li>
-			<p>Order #: <%= order.id %> Party: <%= @parties.find(order.party_id).name %> Food: <%= @foods.find(order.food_id).name %></p>
-			<% if order.no_charge == "true" %>This order is not being charged to the bill. <% else %>This order is included on the bill. <% end %>
-			<form action='/orders/<%= order.id %>' method='post' >
-				<input type='hidden' name='_method' value='patch' />
-				<input type='submit' value="<% if order.no_charge == 'true' %> Include Charge?<% else %>No Charge?<% end %>" />
-			</form>
-			<form action='/orders/<%= order.id %>' method='post' >
-				<input type='hidden' name='_method' value='delete' />
-				<input type='submit' value='Delete!' />
-			</form>	
-		</li>
-	<% end %>
-</ul>

@@ -1,5 +1,19 @@
+<% if @errors %>
+<div class="errors">
+<h1><%= @errors.count %> <%= @errors.count == 1 ? "ERROR" : "ERRORS" %>.</h1>
+  <ul>
+    <% @errors.each do |error|  %>
+      <li><h2><%= error %></h2></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+
 <form action='/foods' method='post'>
 	New Food: <input name='food[name]' />
 	New Food Price <input name='food[price]' />
 	<input type='submit' />
 </form>
+
+<a href='/foods' >Back to the Menu</a>

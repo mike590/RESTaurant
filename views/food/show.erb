@@ -5,13 +5,13 @@
 
 	<% if @food.id == order.food_id %>
 		
-		<p><%= @parties.find(order.party_id).name %> ordered this.</p>
+		<p><%= @parties.find(order.party_id).to_html %></p>
 
 	<% end %>
 
 <% end %>
 
-<a href='/foods'> Back to Foods Page! </a>
+<a href='/foods'> Back to the Menu</a>
 
 <form action="/foods/<%= @food.id %>" method='post' >
 	<input type='hidden' name='_method' value='delete' />

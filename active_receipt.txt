@@ -1,9 +1,11 @@
 Thank you for dining with us!
-mike
+Mike
 Size: 3
+Chocolate Shake: $8
+--- No-charge ---
 Cheerios: $3
-burger: $8
-Total: $11
-15% Gratuity: $ 12.649999999999999
-20% Gratuity: $ 13.2
-25% Gratuity: $ 13.75
+salad: $9
+Total: $12
+15% Gratuity: $ 13.80
+20% Gratuity: $ 14.40
+25% Gratuity: $ 15.00

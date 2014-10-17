@@ -1,15 +1,51 @@
+<% if @errors %>
+<div class="errors">
+<h1><%= @errors.count %> <%= @errors.count == 1 ? "ERROR" : "ERRORS" %>.</h1>
+  <ul>
+    <% @errors.each do |error|  %>
+      <li><h2><%= error %></h2></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
 <a href='/parties/new' >Create a new Party!</a>
-<p><a href='/' > Back to Orders!</a></p>
+<p><a href='/foods' >See the Menu!</a></p>
+
+
+<h2>Currently eating:</h2>
 
 <ul>
 	
 	<% @parties.each do |party| %>
+		<% if party.paid == "false" %>
 	
-		<li>
+			<li>
 	
-			Party Name: <a href="/parties/<%= party.id %>"><%= party.name %> Size: <%= party.size %></a>
+				<a href='/parties/<%=party.id %>'><%= party.to_html %></a>
 	
-		</li>
+			</li>
+
+		<% end %>
+
+	<% end %>
+
+</ul>
+
+<h2>Checked-out:</h2>
+
+<ul>
+	
+	<% @parties.each do |party| %>
+		<% if party.paid == "true" %>
+		
+			<li>
+	
+				<a href='/parties/<%=party.id %>'><%= party.to_html %></a>
+	
+			</li>
+
+		<% end %>
 
 	<% end %>
 

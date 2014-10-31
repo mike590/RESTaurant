@@ -1,0 +1,28 @@
+<div style='width: 95%; height: 35%; background-color: lightred; display: inline_block; background-color: yellow;'>
+
+<div style='width: 25%; display: inline_block; background-color: blue;'>
+  <form action='/sessions' method='post'>
+    <select name ='server_id'>
+      <% @servers.each do |server| %>
+      
+        <option value='<%= server.id %>' ><%= server.name %></option>
+      <% end %>
+    </select>
+    <input name='password' placeholder='Password' type='password' />
+    <button type='submit'>Log In</button>
+</div>
+
+<div style='width: 25%; display: inline_block; background-color: orange;'>
+<a href='/sessions/register'>New Server</a>
+</div>
+
+<div>
+  <a href='/foods'>Menu</a>
+</div>
+
+<div>
+Stuff about recent orders here
+</div>
+</div>
+
+

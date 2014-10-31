@@ -12,5 +12,9 @@
 <form action='/parties' method='post'>
 	New Party: <input name='party[name]' />
 	New Party Size <input name='party[size]' />
+  <input type='hidden' name='party[shape_selector]' value="<%= [0, 1, 2].sample %>" />
+  <input type='hidden' name='party[server_id]' value='<%= @current_user.id %>'/>
 	<input type='submit' />
 </form>
+
+<a href='/'>Home</a>

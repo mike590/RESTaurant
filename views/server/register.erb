@@ -1,0 +1,20 @@
+<% if @errors %>
+ <%= @error %>
+<% end %>
+
+
+
+<form action='/sessions/register' method='post'>
+  <input name='server[name]' placeholder="Name" />
+  <input name='server[password]' placeholder='Password' type='password' />
+  Color: <select name='server[color]'>
+          <option value='red'>red</option>
+          <option value='green'>green</option>
+          <option value='blue'>blue</option>
+          <option value='orange'>orange</option>
+          <option value='purple'>purple</option>
+         </select>
+  <button type='submit'>Register</button>
+</form>
+
+<a href='/'>Home</a>

@@ -16,8 +16,7 @@
 	<input type='submit' value='Delete!' />
 </form></p>
 
-<p><a href='/parties'> Back to Parties Page! </a></p>
-
+<a href='/'>Home</a>
 
 
 <% if @party.paid == "false" %>
@@ -43,6 +42,7 @@ Make a new order!
 	<input type='submit' value='Checkout' />
 </form>
 <% end %>
+
 
 <% if @party.orders.count == 0 %>
 <p><%= @party.name %> hasn't ordered anything.</p>

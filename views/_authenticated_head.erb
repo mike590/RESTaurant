@@ -1,0 +1,19 @@
+<div style='width: 95%; height: 35%; background-color: <%= @current_user.color %>;'>
+
+<div>
+  <h1><%= @current_user.name %> is logged in.
+  <form action='/sessions/destroy' method='post'>
+    <button type='submit'>Log out</button>
+  </form>
+</div>
+
+<div>
+  <a href='/foods'>Menu</a>
+</div>
+
+<div>
+Stuff about recent orders here
+</div>
+</div>
+
+

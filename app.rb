@@ -1,10 +1,7 @@
 require 'bundler'
 Bundler.require
+require './connection'
 
-ActiveRecord::Base.establish_connection(
-adapter: 'postgresql',
-database: 'restaurant_db'
-	)
 
 require './models/food'
 require './models/order'
